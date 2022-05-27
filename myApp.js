@@ -59,10 +59,13 @@ const findPeopleByName = (personName, done) => {
 const food = 'Pizza';
 
 const findOneByFood = (food, done) => {
-    Person.find({ favoriteFoods: food }, (err, data) => {
-        if (err) return console.error(err);
-        done(null, data);
-    });
+    Person.find(
+        { favoriteFoods: favoriteFoods.includes(food) },
+        (err, data) => {
+            if (err) return console.error(err);
+            done(null, data);
+        }
+    );
 };
 
 const findPersonById = (personId, done) => {
