@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { conditionallyMergeWriteConcern } = require('mongodb/lib/utils');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -24,7 +25,15 @@ const personSchema = new Schema({
 const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-    done(null /*, data*/);
+    const pandega = new Person({
+        name: 'Pandega',
+        age: 28,
+        favoriteFoods: ['Mie', 'Pizza'],
+    });
+    pandega.save((err, data) => {
+        if (err) return console.error(err);
+        done(null, data);
+    });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
