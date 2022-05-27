@@ -52,7 +52,7 @@ const personName = 'Jon';
 const findPeopleByName = (personName, done) => {
     Person.find({ name: personName }, (err, data) => {
         if (err) return console.error(err);
-        done(null /*, data*/);
+        done(null, data);
     });
 };
 
